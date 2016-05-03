@@ -138,6 +138,7 @@ function Rock(y, imageName) {
 	this.enabled = true;
 	this.started = false;
 	this.rendered = true;
+	this.dead = false;
 	
 	this.Transform = {};
 	this.Transform.position = new Vector(canvas.width, y);
@@ -235,6 +236,10 @@ function Rock(y, imageName) {
 			this.Renderer.Draw();
 			
 			this.Transform.position.x -= 6;
+
+			if (this.Transform.position.x < 0) {
+				this.dead = true;
+			}
 
 			this.Physics.Collider.x = this.Transform.position.x;
 			this.Physics.Collider.y = this.Transform.position.y;

@@ -71,7 +71,7 @@ function Scene1() {
 	this.Update = function() {
 		if (!Application.GamePaused) {
 			
-			if (count % 15 == 0) {
+			if (count % 20 == 0) {
 				this.createRock(this.GameObjects);
 			}
 
@@ -81,6 +81,14 @@ function Scene1() {
 			}
 
 			for (var i = 0; i < rocks.length; i++) {
+
+				if (rocks[i].dead) {
+					rocks.splice(i,1);
+				}
+
+
+
+
 				if (this.GameObjects[0]) {
 					if(Physics.CheckCollision(this.GameObjects[0].Physics.Collider, rocks[i].Physics.Collider)){
 						this.GameObjects.splice(0,1);
@@ -104,7 +112,9 @@ function Scene1() {
 	}
 
 	this.createRock = function(){
-		var rndPos = Math.Random.RangeInt(0,580,true);
+		var rndPos1 = Math.Random.RangeInt(0,290,true);
+		var rndPos2 = Math.Random.RangeInt(291,580,true);
+		var rndPos = Math.Random.RangeInt(rndPos1,rndPos2,true);
 		var rndImage = Math.Random.RangeInt(0,1,true);
 		var rock = new Rock(rndPos, imageName[rndImage]);	
 		rocks.push(rock);
