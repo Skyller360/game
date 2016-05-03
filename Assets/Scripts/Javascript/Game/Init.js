@@ -25,7 +25,7 @@ window.addEventListener("mousemove",Input.MouseMove);
 		Start
 *********************/
 
-Time.SetTimeWhenGameBegin();
+
 Scenes["Scene1"] = new Scene1();
 Application.LoadedScene = Scenes["Scene1"];
 

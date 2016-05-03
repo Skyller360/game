@@ -55,10 +55,12 @@ function Scene1() {
 	}
 	this.Start = function() {
 		if (!this.started) {
+			Time.SetTimeWhenGameBegin();
+			Time.SetTimeWhenSceneBegin();
 			var boy = new GameObject1();
 			
 			this.GameObjects.push(boy);
-			Time.SetTimeWhenSceneBegin();
+			
 			// operation start
 			this.started = true;
 			console.log('%c System:Scene ' + this.name + " Started !", 'background:#222; color:#bada55');
@@ -75,7 +77,7 @@ function Scene1() {
 
 			for (var i = 0; i < this.GameObjects.length; i++) {
 				this.GameObjects[i].Start();
-				Debug.debugObject(this.GameObjects[i]);
+				// Debug.debugObject(this.GameObjects[i]);
 			}
 
 			for (var i = 0; i < rocks.length; i++) {
