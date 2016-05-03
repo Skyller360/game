@@ -81,7 +81,7 @@ function Scene1() {
 			for (var i = 0; i < rocks.length; i++) {
 				if (this.GameObjects[0]) {
 					if(Physics.CheckCollision(this.GameObjects[0].Physics.Collider, rocks[i].Physics.Collider)){
-						
+					
 						this.GameObjects.splice(0,1);
 					}
 				}
