@@ -234,7 +234,7 @@ function Rock(y, imageName) {
 		if ( this.enabled ) {
 			this.Renderer.Draw();
 			
-			this.Transform.position.x -= 9;
+			this.Transform.position.x -= 6;
 
 			this.Physics.Collider.x = this.Transform.position.x;
 			this.Physics.Collider.y = this.Transform.position.y;
