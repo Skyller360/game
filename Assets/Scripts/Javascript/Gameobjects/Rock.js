@@ -141,7 +141,7 @@ function Rock(y, imageName) {
 	
 	this.Transform = {};
 	this.Transform.position = new Vector(canvas.width, y);
-	this.Transform.size = new Vector(100,100);
+	this.Transform.size = new Vector(90,100);
 	this.Transform.scale = new Vector(1,1);
 	this.Transform.pivot = new Vector(0,0);
 

@@ -237,10 +237,9 @@ function GameObject1() {
 			
 		} else{
 			
-			if (timeScene > 0.1) {
-				
-				if (this.Transform.position.y + this.Transform.size.y >= canvas.height) {
-					this.Transform.position.y = canvas.height - this.Transform.size.y;
+			if (timeScene > 0.1) {				
+				if (this.Transform.position.y + (this.Transform.size.y * this.Transform.scale.y) >= canvas.height) {
+					this.Transform.position.y = canvas.height - (this.Transform.size.y * this.Transform.scale.y);
 				} else {
 					this.Transform.position.y = this.Transform.position.y + (this.velocity + gravity.y) * Time.DeltaTime; 		
 				}

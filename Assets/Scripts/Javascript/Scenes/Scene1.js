@@ -70,7 +70,7 @@ function Scene1() {
 	}
 	this.Update = function() {
 		if (!Application.GamePaused) {
-
+			
 			if (count % 15 == 0) {
 				this.createRock(this.GameObjects);
 			}
@@ -83,8 +83,7 @@ function Scene1() {
 			for (var i = 0; i < rocks.length; i++) {
 				if (this.GameObjects[0]) {
 					if(Physics.CheckCollision(this.GameObjects[0].Physics.Collider, rocks[i].Physics.Collider)){
-						console.log(Scenes['Scene1']);
-						// this.GameObjects.splice(0,1);
+						this.GameObjects.splice(0,1);
 						Scenes['Scene1'] = new Scene1();
 						Application.LoadedScene = Scenes["Scene1"];
 					}
@@ -98,18 +97,26 @@ function Scene1() {
 	}
 	this.GUI = function() {
 		if (!Application.GamePaused) {
-			//Show UI
+			this.showScore();
 		} else {
 			// Show pause menu
 		}
 	}
 
 	this.createRock = function(){
-			var rndPos = Math.Random.RangeInt(0,580,true);
-			var rndImage = Math.Random.RangeInt(0,1,true);
-			var rock = new Rock(rndPos, imageName[rndImage]);	
-			rocks.push(rock);
-			this.GameObjects.push(rock);
+		var rndPos = Math.Random.RangeInt(0,580,true);
+		var rndImage = Math.Random.RangeInt(0,1,true);
+		var rock = new Rock(rndPos, imageName[rndImage]);	
+		rocks.push(rock);
+		this.GameObjects.push(rock);
+	}
+
+	this.showScore = function(){
+		ctx.font = '25px Arial';
+		ctx.fillStyle = 'black';
+		var timeScene = Time.GetTimeSinceSceneBegin()/100 |0;
+		ctx.fillText('Score : '+timeScene, 0, 20);
+		
 	}
 
 	this.Awake()

@@ -19,7 +19,7 @@ var WalkableTiles = [];
 
 var ImagesPath = [
 	{ name:"Boy",path: "PlanetCute/Character Boy.png"},
-	{ name:"herve",path: "PlanetCute/photo.jpg"},
-	{ name:"vincianne",path: "PlanetCute/vincianne.jpg"},
+	{ name:"herve",path: "PlanetCute/herve.png"},
+	{ name:"vincianne",path: "PlanetCute/vincianne.png"},
 ];
 var Images = {};
