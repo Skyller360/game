@@ -248,6 +248,24 @@ function GameObject1() {
 			}
 		}
 
+		if (Input.KeysDown[39]) {
+			if (this.Transform.scale.x < 2) {
+				this.Transform.scale.x += .05;
+				this.Transform.scale.y += .05;
+			} else{
+				this.Transform.scale.x = 2;
+				this.Transform.scale.y = 2;
+			}
+				
+			} else if(Input.KeysDown[37]){
+				if (this.Transform.scale.y > 0.5) {
+					this.Transform.scale.x -= .05;
+					this.Transform.scale.y -= .05;	
+				} else {
+					this.Transform.scale.y = 0.5;
+				}
+			}
+
 		if (!this.started) {
 			// operation start
 
@@ -259,8 +277,12 @@ function GameObject1() {
 	this.Update = function() {
 		if ( this.enabled ) {
 			this.Renderer.Draw();
+
 			this.Physics.Collider.x = this.Transform.position.x;
 			this.Physics.Collider.y = this.Transform.position.y;
+
+			this.Physics.Collider.w = this.Transform.size.x * this.Transform.scale.x;
+			this.Physics.Collider.h = this.Transform.size.y * this.Transform.scale.y;
 		}
 		this.GUI();	
 	};

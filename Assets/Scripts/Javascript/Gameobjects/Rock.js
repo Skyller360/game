@@ -238,9 +238,6 @@ function Rock(y, imageName) {
 
 			this.Physics.Collider.x = this.Transform.position.x;
 			this.Physics.Collider.y = this.Transform.position.y;
-
-
-
 		}
 		this.GUI();	
 	};

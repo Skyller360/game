@@ -49,7 +49,7 @@ function Scene1() {
 	this.started = false;
 
 	this.Awake = function() {
-		console.clear();
+		// console.clear();
 		console.log('%c System:Scene ' + this.name + " Created !", 'background:#222; color:#bada55');
 
 	}
@@ -59,7 +59,7 @@ function Scene1() {
 			Time.SetTimeWhenSceneBegin();
 			var boy = new GameObject1();
 			
-			this.GameObjects.push(boy);
+			this.GameObjects[0] = boy;
 			
 			// operation start
 			this.started = true;
@@ -71,7 +71,7 @@ function Scene1() {
 	this.Update = function() {
 		if (!Application.GamePaused) {
 
-			if (count % 20 == 0) {
+			if (count % 15 == 0) {
 				this.createRock(this.GameObjects);
 			}
 
@@ -83,11 +83,12 @@ function Scene1() {
 			for (var i = 0; i < rocks.length; i++) {
 				if (this.GameObjects[0]) {
 					if(Physics.CheckCollision(this.GameObjects[0].Physics.Collider, rocks[i].Physics.Collider)){
-					
-						this.GameObjects.splice(0,1);
+						console.log(Scenes['Scene1']);
+						// this.GameObjects.splice(0,1);
+						Scenes['Scene1'] = new Scene1();
+						Application.LoadedScene = Scenes["Scene1"];
 					}
 				}
-				
 			}
 
 			count++;
