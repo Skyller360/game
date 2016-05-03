@@ -39,13 +39,14 @@ var Physics = {
 		return dist < circle1.radius + circle2.radius ;
 	},
 	CircleBoxCollision: function(circle, box) {
+
 		var distX = Math.abs( circle.x - box.x - box.w / 2 );
 		var distY = Math.abs( circle.y - box.y - box.h / 2 );
 
 		if ( distX > (box.w/2 + circle.radius) ) {return false;}
 		if ( distY > (box.h/2 + circle.radius) ) {return false;}
-		if (distX <= box.w/2) {return true;}
-		if (distY <= box.h/2) {return true;}
+		if (distX <= box.w/2) {console.log('TOUCHE'); return true; }
+		if (distY <= box.h/2) {console.log('TOUCHE');return true;}
 
 		var dx = distX - box.w/2;
 		var dy = distY - box.h/2;
@@ -86,7 +87,7 @@ var Physics = {
 		// console.log(arguments.length);
 		if (arguments.length == 2 ) {
 			//console.log( arguments[0] instanceof Vector );
-			// console.log( arguments[0] instanceof Box );
+			// console.log( arguments[1] instanceof Circle );
 
 			if (arguments[0] instanceof Vector ) {
 				if (arguments[1] instanceof Box) {
@@ -109,7 +110,7 @@ var Physics = {
 				}
 			} else if (arguments[0] instanceof Circle) {
 				if (arguments[1] instanceof Box) {
-					//console.log('CircleBoxCollision');
+					// console.log('CircleBoxCollision');
 					return Physics.CircleBoxCollision(arguments[0],arguments[1])
 				} else if (arguments[1] instanceof Circle) {
 					//console.log('CircleCircleCollision');

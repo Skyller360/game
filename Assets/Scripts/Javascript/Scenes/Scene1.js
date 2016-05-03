@@ -43,7 +43,7 @@ function Scene1() {
 	this.name = "Scene1";
 	this.GameObjects =[];
 	var rocks = [];
-	var imageName = ['herve','vincianne'];
+	var imageName = ['herve','vincianne', 'boris', 'cherif', 'teddy', 'christian'];
 	var count = 0;
 
 	this.started = false;
@@ -90,7 +90,7 @@ function Scene1() {
 
 
 				if (this.GameObjects[0]) {
-					if(Physics.CheckCollision(this.GameObjects[0].Physics.Collider, rocks[i].Physics.Collider)){
+					if(Physics.CheckCollision(rocks[i].Physics.Collider, this.GameObjects[0].Physics.Collider)){
 						this.GameObjects.splice(0,1);
 						Scenes['Scene1'] = new Scene1();
 						Application.LoadedScene = Scenes["Scene1"];
@@ -115,7 +115,7 @@ function Scene1() {
 		var rndPos1 = Math.Random.RangeInt(0,290,true);
 		var rndPos2 = Math.Random.RangeInt(291,580,true);
 		var rndPos = Math.Random.RangeInt(rndPos1,rndPos2,true);
-		var rndImage = Math.Random.RangeInt(0,1,true);
+		var rndImage = Math.Random.RangeInt(0,imageName.length - 1,true);
 		var rock = new Rock(rndPos, imageName[rndImage]);	
 		rocks.push(rock);
 		this.GameObjects.push(rock);

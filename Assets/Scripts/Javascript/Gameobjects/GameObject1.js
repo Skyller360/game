@@ -142,7 +142,7 @@ function GameObject1() {
 	
 	this.Transform = {};
 	this.Transform.size = new Vector(69,77);
-	this.Transform.position = new Vector(canvas.width / 2,(canvas.height / 2) - this.Transform.size.y);
+	this.Transform.position = new Vector(canvas.width / 3,(canvas.height / 2) - this.Transform.size.y);
 	this.Transform.scale = new Vector(1,1);
 	this.Transform.pivot = new Vector(0,0);
 
