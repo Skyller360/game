@@ -71,7 +71,7 @@ function Scene1() {
 	this.Update = function() {
 		if (!Application.GamePaused) {
 
-			if (count % 45 == 0) {
+			if (count % 20 == 0) {
 				this.createRock(this.GameObjects);
 			}
 

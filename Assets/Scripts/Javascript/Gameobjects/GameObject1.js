@@ -138,7 +138,7 @@ function GameObject1() {
 	this.enabled = true;
 	this.started = false;
 	this.rendered = true;
-	this.velocity = 150;
+	this.velocity = 350;
 	
 	this.Transform = {};
 	this.Transform.size = new Vector(69,77);

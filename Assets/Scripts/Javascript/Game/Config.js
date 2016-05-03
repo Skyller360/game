@@ -1,6 +1,6 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
-canvas.style.background = 'rgba(52,152,219,.6)';
+
 
 
 
@@ -11,7 +11,7 @@ gravity.y = -9.81;
 var Application = {
 	LoadedScene: null,
 	GamePaused: false,
-	debugMode: true
+	debugMode: false
 };
 
 var ImagesLoaded = 0;
