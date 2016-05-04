@@ -144,6 +144,7 @@ function GameObject() {
 	this.Transform.size = new Vector();
 	this.Transform.scale = new Vector(1,1);
 	this.Transform.pivot = new Vector(0,0);
+	this.Transform.angle =;
 
 	this.Physics = {};
 	this.Physics.enabled = true;
@@ -174,6 +175,7 @@ function GameObject() {
 		},
 		
 		Draw: function() {
+			
 			if (this.isSpriteSheet) 
 			{
 				if (this.Animation.animated) {	
