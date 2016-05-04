@@ -133,22 +133,15 @@
 *	Add NameOfYourGameObject.Start() in your scene.
 */
 
-function Rock(y, imageName, vel = 8) {
-	this.name = "GameObject";
+function ParticleSystem() {
+	this.name = "ParticleSystem";
 	this.enabled = true;
 	this.started = false;
 	this.rendered = true;
-	this.dead = false;
-	this.velocity = vel;
-	this.count = 0;
 	
-
-	this.index = 0;
-
-
 	this.Transform = {};
-	this.Transform.position = new Vector(canvas.width, y);
-	this.Transform.size = new Vector(55,55);
+	this.Transform.position = new Vector(10,10);
+	this.Transform.size = new Vector(1,1);
 	this.Transform.scale = new Vector(1,1);
 	this.Transform.pivot = new Vector(0.5,0.5);
 	this.Transform.angle = 0;
@@ -159,13 +152,21 @@ function Rock(y, imageName, vel = 8) {
 	this.Physics.dragAndDroppable = false;
 	this.Physics.ColliderIsSameSizeAsTransform = false;
 	this.Physics.countHovered = 0;
-	this.Physics.Collider = new Box(this.Transform.position.x, this.Transform.position.y, this.Transform.size.x, this.Transform.size.y);
+	this.Physics.Collider = {
+		position: new Vector(),
+		size: new Vector()
+	};
+
+	this.emitters = [];
+
 	this.Renderer = {
 		isVisible: true,
 		isSpriteSheet: false,
 		that: this.Transform,
+		thot : this,
+
 		Material: {
-			Source: Images[imageName],
+			Source: Images['boy'],
 			SizeFrame: new Vector(),
 			CurrentFrame: new Vector(),
 		},
@@ -181,6 +182,7 @@ function Rock(y, imageName, vel = 8) {
 			ctx.save();
 			ctx.translate(this.that.position.x,	this.that.position.y);
 			ctx.rotate(Math.DegreeToRadian(this.that.angle));
+
 			if (this.isSpriteSheet) 
 			{
 				if (this.Animation.animated) {	
@@ -203,7 +205,6 @@ function Rock(y, imageName, vel = 8) {
 
 				var scaledSizeX = this.that.size.x*this.that.scale.x;
 				var scaledSizeY = this.that.size.y*this.that.scale.y;
-				//console.log(this);
 				ctx.drawImage(this.Material.Source,
 								this.Material.CurrentFrame.x,
 								this.Material.CurrentFrame.y,
@@ -225,8 +226,9 @@ function Rock(y, imageName, vel = 8) {
 								scaledSizeY);
 			}
 			ctx.restore();
-		}			
 
+		}
+		
 	};
 
 
@@ -237,6 +239,11 @@ function Rock(y, imageName, vel = 8) {
 		if (!this.started) {
 			// operation start
 
+			var test = new Vector(10,10);
+
+			this.emitters.push(new Emitter(test, new Vector(2,2), 45, 20));
+			console.log(this.emitters);
+
 			this.started = true;
 			console.log('%c System:GameObject ' + this.name + " Started !", 'background:#222; color:#bada55');
 		}
@@ -244,23 +251,13 @@ function Rock(y, imageName, vel = 8) {
 	};
 	this.Update = function() {
 		if ( this.enabled ) {
-			if (this.velocity > 8) {
-				this.Transform.angle += this.velocity;	
-			} else {
-				this.Transform.angle += 1;
-			}
-			
-			this.Renderer.Draw();
-			this.Transform.position.x -= this.velocity;
-			if (this.Transform.position.x < 0) {
-				this.dead = true;
+
+			for(var emitter in this.emitters){
+				this.emitters[emitter].update();
 			}
 
-			this.Physics.Collider.x = this.Transform.position.x;
-			this.Physics.Collider.y = this.Transform.position.y;
 		}
 		this.GUI();	
-		this.count++;
 	};
 	this.GUI = function() {
 		

@@ -61,8 +61,10 @@ function Scene1() {
 			Time.SetTimeWhenSceneBegin();
 
 			var boy = new GameObject1();
-			
+
 			this.GameObjects[0] = boy;
+
+
 			
 			// operation start
 			this.started = true;
@@ -76,8 +78,11 @@ function Scene1() {
 			
 			// this.createSpike();
 
-			if (count % 20 == 0) {
-				this.createRock(this.GameObjects);
+			if (count % 13 == 0) {
+				this.createRock(false);
+			}
+			if (count % 45 == 0) {
+				this.createRock(true);
 			}
 
 			for (var i = 0; i < this.GameObjects.length; i++) {
@@ -104,13 +109,13 @@ function Scene1() {
 			}
 
 
-			// for (var i = 0; i < spikes.length; i++) {
-			// 	if(Physics.CheckCollision(spikes[i].Physics.Collider, this.GameObjects[0].Physics.Collider)){
-			// 			this.GameObjects.splice(0,1);
-			// 			Scenes['Scene1'] = new Scene1();
-			// 			Application.LoadedScene = Scenes["Scene1"];
-			// 		}
-			// }
+			for (var i = 0; i < spikes.length; i++) {
+				if(Physics.CheckCollision(spikes[i].Physics.Collider, this.GameObjects[0].Physics.Collider)){
+						this.GameObjects.splice(0,1);
+						Scenes['Scene1'] = new Scene1();
+						Application.LoadedScene = Scenes["Scene1"];
+					}
+			}
 
 			count++;
 			
@@ -125,23 +130,30 @@ function Scene1() {
 		}
 	}
 
-	this.createRock = function(){
+	this.createRock = function(speed){
+
 		var rndPos1 = Math.Random.RangeInt(0,290,true);
-		var rndPos2 = Math.Random.RangeInt(291,580,true);
+		var rndPos2 = Math.Random.RangeInt(291,600,true);
 
 		var rndPos = Math.Random.RangeInt(rndPos1,rndPos2,true);
 		var rndImage = Math.Random.RangeInt(0,imageName.length - 1,true);
 
-		var rock = new Rock(rndPos, imageName[rndImage]);	
+		if (speed) {
+			var rndVel = Math.Random.RangeInt(10,18,true);
+			var rock = new Rock(rndPos, imageName[rndImage], rndVel);	
+		} else{
+			var rock = new Rock(rndPos, imageName[rndImage]);	
+		}
+		
 		rocks.push(rock);
 		this.GameObjects.push(rock);
 	}
 
-	// this.createSpike = function(){
-	// 	var spike = new Spike();	
-	// 	spikes.push(spike);
-	// 	this.GameObjects.push(spike);
-	// }
+	this.createSpike = function(){
+		var spike = new Spike();	
+		spikes.push(spike);
+		this.GameObjects.push(spike);
+	}
 
 	this.showScore = function(){
 		ctx.font = '25px Arial';
