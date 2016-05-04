@@ -43,8 +43,9 @@ function Scene1() {
 	this.name = "Scene1";
 	this.GameObjects =[];
 	var rocks = [];
-	var imageName = ['herve','vincianne', 'boris', 'cherif', 'teddy', 'christian'];
+	var imageName = ['herve','vincianne', 'boris', 'cherif', 'teddy', 'christian', 'frederic'];
 	var count = 0;
+	var spikes = [];
 
 	this.started = false;
 
@@ -55,8 +56,10 @@ function Scene1() {
 	}
 	this.Start = function() {
 		if (!this.started) {
+
 			Time.SetTimeWhenGameBegin();
 			Time.SetTimeWhenSceneBegin();
+
 			var boy = new GameObject1();
 			
 			this.GameObjects[0] = boy;
@@ -71,6 +74,8 @@ function Scene1() {
 	this.Update = function() {
 		if (!Application.GamePaused) {
 			
+			// this.createSpike();
+
 			if (count % 20 == 0) {
 				this.createRock(this.GameObjects);
 			}
@@ -98,6 +103,15 @@ function Scene1() {
 				}
 			}
 
+
+			// for (var i = 0; i < spikes.length; i++) {
+			// 	if(Physics.CheckCollision(spikes[i].Physics.Collider, this.GameObjects[0].Physics.Collider)){
+			// 			this.GameObjects.splice(0,1);
+			// 			Scenes['Scene1'] = new Scene1();
+			// 			Application.LoadedScene = Scenes["Scene1"];
+			// 		}
+			// }
+
 			count++;
 			
 		}
@@ -114,12 +128,20 @@ function Scene1() {
 	this.createRock = function(){
 		var rndPos1 = Math.Random.RangeInt(0,290,true);
 		var rndPos2 = Math.Random.RangeInt(291,580,true);
+
 		var rndPos = Math.Random.RangeInt(rndPos1,rndPos2,true);
 		var rndImage = Math.Random.RangeInt(0,imageName.length - 1,true);
+
 		var rock = new Rock(rndPos, imageName[rndImage]);	
 		rocks.push(rock);
 		this.GameObjects.push(rock);
 	}
+
+	// this.createSpike = function(){
+	// 	var spike = new Spike();	
+	// 	spikes.push(spike);
+	// 	this.GameObjects.push(spike);
+	// }
 
 	this.showScore = function(){
 		ctx.font = '25px Arial';

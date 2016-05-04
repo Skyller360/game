@@ -139,6 +139,8 @@ function Rock(y, imageName) {
 	this.started = false;
 	this.rendered = true;
 	this.dead = false;
+	this.velocity = 8;
+	this.count = 0;
 	
 	this.Transform = {};
 	this.Transform.position = new Vector(canvas.width, y);
@@ -233,10 +235,9 @@ function Rock(y, imageName) {
 	};
 	this.Update = function() {
 		if ( this.enabled ) {
-			this.Renderer.Draw();
-			
-			this.Transform.position.x -= 6;
 
+			this.Renderer.Draw();
+			this.Transform.position.x -= this.velocity;
 			if (this.Transform.position.x < 0) {
 				this.dead = true;
 			}
@@ -245,6 +246,7 @@ function Rock(y, imageName) {
 			this.Physics.Collider.y = this.Transform.position.y;
 		}
 		this.GUI();	
+		this.count++;
 	};
 	this.GUI = function() {
 		
